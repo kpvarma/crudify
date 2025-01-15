@@ -1,6 +1,6 @@
-require "devise_crud/version"
-require "devise_crud/engine"
+require "crudify/version"
+require "crudify/engine"
 
-module DeviseCrud
+module CRUDify
   # Your code goes here...
 end

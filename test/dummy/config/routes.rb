@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  mount DeviseCrud::Engine => "/devise_crud"
+  mount CRUDify::Engine => "/crudify"
 end

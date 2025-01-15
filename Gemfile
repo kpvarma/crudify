@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in devise_crud.gemspec.
+# Specify your gem's dependencies in CRUDify.gemspec.
 gemspec
 
 gem "puma"

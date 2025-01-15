@@ -1,6 +1,6 @@
-module DeviseCrud
+module CRUDify
   class Engine < ::Rails::Engine
-    isolate_namespace DeviseCrud
+    isolate_namespace CRUDify
     config.generators.api_only = true
 
     # Enable migrations

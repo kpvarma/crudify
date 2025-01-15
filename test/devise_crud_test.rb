@@ -1,7 +1,7 @@
 require "test_helper"
 
-class DeviseCrudTest < ActiveSupport::TestCase
+class CRUDifyTest < ActiveSupport::TestCase
   test "it has a version number" do
-    assert DeviseCrud::VERSION
+    assert CRUDify::VERSION
   end
 end

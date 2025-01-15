@@ -1,6 +1,6 @@
-# DeviseCrud Gem
+# CRUDify Gem
 
-DeviseCrud is a lightweight and flexible Ruby on Rails gem that extends Devise by exposing APIs for managing Devise-powered user models. This gem is designed for developers looking to build a seamless CRUD (Create, Read, Update, Delete) functionality for their Devise-managed models without requiring any UI integration.
+CRUDify is a lightweight and flexible Ruby on Rails gem that extends Devise by exposing APIs for managing Devise-powered user models. This gem is designed for developers looking to build a seamless CRUD (Create, Read, Update, Delete) functionality for their Devise-managed models without requiring any UI integration.
 
 The gem is especially useful when paired with next-admin, a Next.js frontend application designed to consume these APIs and provide a user-friendly interface for managing your Devise-powered user types.
 
@@ -17,7 +17,7 @@ The gem is especially useful when paired with next-admin, a Next.js frontend app
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'devise_crud'
+gem 'crudify'
 ```
 
 And then execute:
@@ -29,7 +29,7 @@ bundle install
 Or install it yourself as:
 
 ```bash
-gem install devise_crud
+gem install crudify
 ```
 
 ## Setup
@@ -37,11 +37,11 @@ gem install devise_crud
 1. Add Devise to Your Application:
    Ensure you have Devise configured for your application.
 
-2. Mount the DeviseCrud Engine:
+2. Mount the CRUDify Engine:
    Add the following line to your config/routes.rb file:
 
    ```ruby
-   mount DeviseCrud::Engine, at: "/devise_crud"
+   mount CRUDify::Engine, at: "/crudify"
    ```
 
 3. API Key Validation:
@@ -49,18 +49,18 @@ gem install devise_crud
 
 ## Available APIs
 
-The DeviseCrud gem exposes the following key API endpoints:
+The CRUDify gem exposes the following key API endpoints:
 
 ### General APIs
 
-* Health Check: `/devise_crud/api/v1/health`
+* Health Check: `/crudify/api/v1/health`
   Validates the availability of the gem.
-* API Key Validation: `/devise_crud/api/v1/validate_api_key`
+* API Key Validation: `/crudify/api/v1/validate_api_key`
   Verifies the authenticity of the provided API key.
 
 ### User Management
 
-* Get All User Types: `/devise_crud/api/v1/user_types`
+* Get All User Types: `/crudify/api/v1/user_types`
   Retrieves all Devise-managed user types and their attributes, devise features, and routes.
 
 ### CRUD APIs for User Types
@@ -69,27 +69,27 @@ Dynamic CRUD APIs are generated for each Devise-managed user type. For example, 
 
 Example for Student:
 
-* Index: `/devise_crud/api/v1/user_type_crud/student/` (GET)
+* Index: `/crudify/api/v1/user_type_crud/student/` (GET)
   Lists all students.
-* Show: `/devise_crud/api/v1/user_type_crud/student/:id` (GET)
+* Show: `/crudify/api/v1/user_type_crud/student/:id` (GET)
   Fetches a single student by ID.
-* Create: `/devise_crud/api/v1/user_type_crud/student/` (POST)
+* Create: `/crudify/api/v1/user_type_crud/student/` (POST)
   Creates a new student.
-* Update: `/devise_crud/api/v1/user_type_crud/student/:id` (PUT/PATCH)
+* Update: `/crudify/api/v1/user_type_crud/student/:id` (PUT/PATCH)
   Updates an existing student.
-* Destroy: `/devise_crud/api/v1/user_type_crud/student/:id` (DELETE)
+* Destroy: `/crudify/api/v1/user_type_crud/student/:id` (DELETE)
   Deletes a student by ID.
 
 Similar routes are created for other user types such as Teacher.
 
 ## Usage
 
-This gem does not provide any UI functionality. To interact with the APIs, you can use Postman, Insomnia, or integrate it with next-admin. The recommended way to explore and manage your Devise models is by using next-admin, a Next.js-based frontend admin panel designed to work seamlessly with the DeviseCrud gem.
+This gem does not provide any UI functionality. To interact with the APIs, you can use Postman, Insomnia, or integrate it with next-admin. The recommended way to explore and manage your Devise models is by using next-admin, a Next.js-based frontend admin panel designed to work seamlessly with the CRUDify gem.
 
 ### Using next-admin
 
 * Next-Admin Repository: Link to next-admin repo
-* Install and configure the frontend to point to your backend API (`/devise_crud`).
+* Install and configure the frontend to point to your backend API (`/crudify`).
 * Experience a dynamic and user-friendly UI for managing Devise models.
 
 ## Development
@@ -123,7 +123,7 @@ docker compose logs next_admin -f
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at DeviseCrud GitHub Repository. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the code of conduct.
+Bug reports and pull requests are welcome on GitHub at CRUDify GitHub Repository. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the code of conduct.
 
 ## License
 
@@ -131,4 +131,4 @@ The gem is available as open source under the terms of the MIT License.
 
 ## Code of Conduct
 
-Everyone interacting in the DeviseCrud project's codebases, issue trackers, chat rooms, and mailing lists is expected to follow the code of conduct.
+Everyone interacting in the CRUDify project's codebases, issue trackers, chat rooms, and mailing lists is expected to follow the code of conduct.

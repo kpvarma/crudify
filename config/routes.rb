@@ -1,4 +1,4 @@
-DeviseCrud::Engine.routes.draw do
+CRUDify::Engine.routes.draw do
   
   namespace :api do
     namespace :v1 do

@@ -1,4 +1,4 @@
 # desc "Explaining what the task does"
-# task :devise_crud do
+# task :crudify do
 #   # Task goes here
 # end

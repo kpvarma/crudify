@@ -1,4 +1,4 @@
-module DeviseCrud
+module CRUDify
   module Generators
     class MigrationGenerator < Rails::Generators::Base
       source_root File.expand_path("templates", __dir__)

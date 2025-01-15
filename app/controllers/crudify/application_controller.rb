@@ -1,4 +1,4 @@
-module DeviseCrud
+module CRUDify
   class ApplicationController < ActionController::API
 
     # Extract and validate the Bearer token
@@ -16,7 +16,7 @@ module DeviseCrud
         render json: { error: 'API key is missing' }, status: :bad_request and return
       end
 
-      api_key_record = DeviseCrud::ApiKey.find_by(key: api_key)
+      api_key_record = CRUDify::ApiKey.find_by(key: api_key)
 
       if api_key_record.nil?
         render json: { error: 'Invalid API key' }, status: :unauthorized and return

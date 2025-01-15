@@ -1,4 +1,4 @@
-module DeviseCrud
+module CRUDify
     class ApiKey < ApplicationRecord
       enum :status, [:active, :expired, :revoked], default: :active
   

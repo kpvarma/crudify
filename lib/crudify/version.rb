@@ -1,3 +1,3 @@
-module DeviseCrud
+module CRUDify
   VERSION = "0.1.0"
 end

@@ -1,4 +1,4 @@
-module DeviseCrud
+module CRUDify
   module Api
     module V1
       class ApiKeysController < ApplicationController

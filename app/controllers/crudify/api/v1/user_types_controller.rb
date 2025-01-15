@@ -1,4 +1,4 @@
-module DeviseCrud
+module CRUDify
   module Api
     module V1
       class UserTypesController < ApplicationController
@@ -28,7 +28,7 @@ module DeviseCrud
               model: model,                # e.g., "students" or "teachers"
               attributes: attributes,      # All attributes for the model
               devise_features: devise_features, # Devise features enabled for the model
-              devise_routes: devise_routes # Dynamic Devise routes configured for the model
+              routes: devise_routes # Dynamic Devise routes configured for the model
             }
           end
 

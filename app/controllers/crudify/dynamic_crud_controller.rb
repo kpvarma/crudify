@@ -1,5 +1,5 @@
-# lib/devise_crud/controllers/dynamic_crud_controller.rb
-module DeviseCrud
+# lib/crudify/controllers/dynamic_crud_controller.rb
+module CRUDify
     class DynamicCrudController < ActionController::API
       before_action :set_model
   

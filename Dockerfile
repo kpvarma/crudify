@@ -3,7 +3,7 @@ FROM ruby:3.2.2-slim
 
 # Set metadata for the image
 LABEL maintainer="krshnaprsad@gmail.com"
-LABEL description="Base Ruby image with essential tools and configurations for Ruby projects."
+LABEL description="A dynamic CRUD gem for Rails models, supporting both Devise and custom user management."
 
 # Install basic dependencies
 RUN apt-get update && apt-get install -y \

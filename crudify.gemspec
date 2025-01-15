@@ -1,13 +1,13 @@
-require_relative "lib/devise_crud/version"
+require_relative "lib/crudify/version"
 
 Gem::Specification.new do |spec|
-  spec.name        = "devise_crud"
-  spec.version     = DeviseCrud::VERSION
+  spec.name        = "crudify-rails"
+  spec.version     = CRUDify::VERSION
   spec.authors = ["Krishna Prasad Varma"]
   spec.email = ["krshnaprsad@gmail.com"]
-  spec.summary = "A dynamic CRUD gem for Devise-managed models in Rails."
-  spec.description = "The devise_crud gem provides dynamic CRUD operations and APIs for Devise-managed models in Rails applications. It simplifies user management with minimal setup."
-  spec.homepage = "https://github.com/kpvarma/devise_crud"
+  spec.summary = "A dynamic CRUD gem for Rails models, supporting both Devise and custom user management."
+  spec.description = "CRUDify is a dynamic Rails gem that provides CRUD operations and APIs for managing Devise-backed models and custom user models. It offers seamless integration with Next.js-based admin interfaces and aims to simplify full-stack user and model management with minimal configuration."
+  spec.homepage = "https://github.com/kpvarma/crudify"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1.0"
 
@@ -16,8 +16,8 @@ Gem::Specification.new do |spec|
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/kpvarma/devise_crud"
-  spec.metadata["changelog_uri"] = "https://github.com/kpvarma/devise_crud/blob/main/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/kpvarma/crudify-rails"
+  spec.metadata["changelog_uri"] = "https://github.com/kpvarma/crudify/blob/main/CHANGELOG.md"
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
