@@ -1,7 +1,7 @@
 module CRUDify
     module Api
       module V1
-        class UserTypeCrudController < ApplicationController
+        class DynamicCrudController < ApplicationController
           before_action :authenticate_token
           before_action :set_model_class
   

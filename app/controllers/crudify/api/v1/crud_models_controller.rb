@@ -1,11 +1,16 @@
 module CRUDify
   module Api
     module V1
-      class UserTypesController < ApplicationController
+      class CrudModelsController < ApplicationController
 
         before_action :authenticate_token
 
-        def index
+        def devise_user_models
+          unless defined?(Devise) && Devise.respond_to?(:mappings) && Devise.mappings.any?
+            render json: { error: "Devise is not configured in this application." }, status: :unprocessable_entity
+            return
+          end
+          
           # Dynamically fetch all Devise models
           devise_models = Devise.mappings.keys.map(&:to_s)
 
@@ -33,6 +38,18 @@ module CRUDify
           end
 
           render json: user_types, status: :ok
+        end
+
+        def custom_user_models
+          metadata = CRUDify.configuration.configurable_models.map do |model|
+            {
+              name: model.to_s,
+              title: model.crudify_config[:title],
+              searchable: model.crudify_config[:searchable],
+              actions: model.crudify_config[:actions]
+            }
+          end
+          render json: { models: metadata }, status: :ok
         end
 
         private
