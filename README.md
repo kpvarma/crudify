@@ -65,7 +65,7 @@ The CRUDify gem exposes the following key API endpoints:
 
 ### CRUD APIs for User Types
 
-Dynamic CRUD APIs are generated for each Devise-managed user type. For example, if you have Student and Teacher models managed by Devise, the following routes are available:
+Dynamic CRUD APIs are generated for each Devise-managed user type. For example, if you have Student and Faculty models managed by Devise, the following routes are available:
 
 Example for Student:
 
@@ -80,7 +80,7 @@ Example for Student:
 * Destroy: `/crudify/api/v1/user_type_crud/student/:id` (DELETE)
   Deletes a student by ID.
 
-Similar routes are created for other user types such as Teacher.
+Similar routes are created for other user types such as Faculty.
 
 ## Usage
 

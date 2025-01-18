@@ -8,9 +8,9 @@ module CRUDify
   
       before_create :generate_key
   
-      def self.generate!(expires_in_days: 30)
+      def self.generate!(expires_in_days: 30, api_key: generate_secure_key)
         create!(
-          key: generate_secure_key,
+          key: api_key,
           expires_at: Time.now + expires_in_days.days,
           status: :active
         )

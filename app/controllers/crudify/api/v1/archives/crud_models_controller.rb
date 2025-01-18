@@ -15,7 +15,7 @@ module CRUDify
           devise_models = Devise.mappings.keys.map(&:to_s)
 
           user_types = devise_models.map do |model|
-            # Fetch the model class (e.g., Student, Teacher)
+            # Fetch the model class (e.g., Student, Faculty)
             klass = model.classify.constantize
 
             # Collect the attributes dynamically
@@ -26,11 +26,10 @@ module CRUDify
 
             # Collect the Devise routes dynamically for the model
             devise_routes = fetch_devise_routes_for(model)
-            #binding.pry
 
             {
-              name: model.classify,        # e.g., "Student" or "Teacher"
-              model: model,                # e.g., "students" or "teachers"
+              name: model.classify,        # e.g., "Student" or "Faculty"
+              model: model,                # e.g., "students" or "faculties"
               attributes: attributes,      # All attributes for the model
               devise_features: devise_features, # Devise features enabled for the model
               routes: devise_routes # Dynamic Devise routes configured for the model
