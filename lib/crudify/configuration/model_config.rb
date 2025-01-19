@@ -19,8 +19,8 @@ module CRUDify
         @records_per_page = [40, 60, 100]
         @record_scopes = []
         @record_filters = []
-        @list_columns = []
-        @form_fields = []
+        @list_columns = ColumnConfig.new
+        @form_fields = FieldConfig.new
       end
     
       # DSL methods for configuration
@@ -116,7 +116,7 @@ module CRUDify
       end
 
       def get_list_columns
-        @list_columns
+        @list_columns&.columns
       end
 
       # DSL Method for Form Columns
