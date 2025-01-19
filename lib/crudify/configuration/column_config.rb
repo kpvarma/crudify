@@ -4,11 +4,17 @@ module CRUDify
             attr_accessor :columns
         
             def initialize
-            @columns = []
+                @columns = []
             end
         
-            def column(details)
-            @columns << details
+            # Define a column with name, options, and block
+            def column(name, options = {}, &block)
+                @columns << { name: name, options: options, block: block }
+            end
+
+            # Retrieve columns with details for processing
+            def get_columns
+                @columns
             end
         end
     end

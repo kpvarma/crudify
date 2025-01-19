@@ -7,7 +7,7 @@ module CRUDify
           before_action :set_model_class
           
           def index
-            render json: @model_class.all
+            render json: scoped_collection
           end
   
           def show
