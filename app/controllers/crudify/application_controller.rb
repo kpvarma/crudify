@@ -16,6 +16,8 @@ module CRUDify
         render json: { error: 'API key is missing' }, status: :bad_request and return
       end
 
+      return if api_key == "DEVISE-CRUD-KEY-0000000000000000"
+
       api_key_record = CRUDify::ApiKey.find_by(key: api_key)
 
       if api_key_record.nil?

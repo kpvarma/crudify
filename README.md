@@ -115,9 +115,9 @@ This will create a git tag for the version, push git commits and the created tag
 ``` bash
 docker compose build
 docker compose up -d
-docker compose exec -it devise_rails bundle exec rails console
+docker compose exec -it academix bundle exec rails console
 docker compose exec -it next_admin sh
-docker compose attach devise_rails
+docker compose attach academix
 docker compose logs next_admin -f
 ```
 

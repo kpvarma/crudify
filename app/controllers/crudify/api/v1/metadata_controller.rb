@@ -18,10 +18,11 @@ module CRUDify
           # Generate the models metadata
           models_metadata = CRUDify.configuration.crudify_models.map do |model_name, config|
             {
-              type: "crudify_model",
-              model_name: model_name,
+              name: model_name,
               menu: config.get_menu,
-              devise_model: devise_models.include?(model_name)
+              title: config.get_title,
+              description: config.get_description,
+              is_devise_model: devise_models.include?(model_name)
             }
           end
 

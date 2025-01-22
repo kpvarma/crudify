@@ -10,7 +10,7 @@ module CRUDify
             "priority": -1,
             "label": "#{name.pluralize.titleize}",
             "parent": "Models"
-        },
+        }
         @title = name.to_s.titleize
         @description = "Manage #{name.to_s.titleize.pluralize}"
         @api_end_points = []
