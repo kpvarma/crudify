@@ -4,7 +4,7 @@ module CRUDify
     attr_accessor :configuration
 
     # Delegate register methods to the configuration
-    delegate :register, :register_user, to: :configuration
+    delegate :register, :visualise, to: :configuration
   end
 
   def self.configure

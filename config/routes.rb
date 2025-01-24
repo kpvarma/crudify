@@ -26,32 +26,13 @@ CRUDify::Engine.routes.draw do
         put '/:id/:action_name', to: 'dynamic_crud#catch_all_member_action', as: 'catch_all_member_action'
       end
 
-      # CRUDify.configuration.crudify_models.each do |model_name, config|
-      #   endpoints = Array(config.get_api_end_points || [])
-      #   custom_member_actions = Array(config.get_custom_member_actions.map { |action| action[:action_name] } || [])
-      #   custom_collection_actions = Array(config.get_custom_collection_actions.map { |action| action[:action_name] } || [])
+      scope '/visualisations/:model_name' do
+        # Route for dynamic collection actions for collection visualisations
+        get '/:action_name', to: 'visualisations#catch_all_collection_action', as: 'catch_all_collection_visualisation'
 
-      #   # Rails.logger.tagged("CRUDify") do
-      #     # Rails.logger.error "routes.rb endpoints: #{endpoints}"
-      #     # Rails.logger.error "routes.rb custom_member_actions: #{custom_member_actions}"
-      #     # Rails.logger.error "routes.rb custom_collection_actions: #{custom_collection_actions}"
-
-      #     # Register standard RESTful routes with `only`
-      #     resources model_name.to_s.underscore.pluralize, only: endpoints do
-      #       # Add custom GET actions dynamically for individual resources
-      #       custom_member_actions.each do |action|
-      #         # Rails.logger.error "routes.rb action: #{action}"
-      #         get action, on: :member # For member-level actions (applies to specific resource)
-      #       end
-
-      #       custom_collection_actions.each do |action|
-      #         Rails.logger.error "routes.rb action: #{action}"
-      #         get action, on: :collection # For collection actions (applies to specific resource)
-      #       end
-      #     end
-      #   # end
-        
-      # end
+        # Route for dynamic member actions for entity visualisations
+        get '/:id/:action_name', to: 'visualisations#catch_all_member_action', as: 'catch_all_member_visualisation'
+      end
 
     end
   end

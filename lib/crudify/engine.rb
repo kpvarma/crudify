@@ -40,6 +40,7 @@ module CRUDify
         config.default_api_end_points = [:index, :create, :read, :update, :delete]
         config.admin_namespace = "crudify_admin"
         config.crudify_models = {} # Ensure the crudify_models hash is initialized
+        config.crudify_visuals = {} # Ensure the crudify_models hash is initialized
         config.exclude_models = [] # Allow the host app to modify this
       end
     end
@@ -65,13 +66,13 @@ module CRUDify
 
         if Dir.exist?(config_path)
           Rails.logger.tagged("CRUDify") do
-            Rails.logger.info "Loading configurations from #{config_path}"
+            Rails.logger.debug "Loading configurations from #{config_path}"
           end
           
           # Require each Ruby file in the directory
           Dir.glob(config_path.join("*.rb")).each do |file|
             Rails.logger.tagged("CRUDify") do
-              Rails.logger.info "Loaded configuration from file #{file}"
+              Rails.logger.debug "Loaded configuration from file #{file}"
             end
             begin
               require_dependency file

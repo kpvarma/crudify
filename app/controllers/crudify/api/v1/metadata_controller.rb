@@ -7,14 +7,13 @@ module CRUDify
 
         # Index action - Render specific metadata of all models
         def index
-          
           # Get the models for which devise auth is configured
           unless defined?(Devise) && Devise.respond_to?(:mappings) && Devise.mappings.any?
             devise_models = []
           else
-            devise_models = Devise.mappings.map{|x, y| y.class_name}
+            devise_models = Devise.mappings.map { |_x, y| y.class_name }
           end
-
+        
           # Generate the models metadata
           models_metadata = CRUDify.configuration.crudify_models.map do |model_name, config|
             {
@@ -22,10 +21,12 @@ module CRUDify
               menu: config.get_menu,
               title: config.get_title,
               description: config.get_description,
-              is_devise_model: devise_models.include?(model_name)
+              is_devise_model: devise_models.include?(model_name),
+              visual_config: CRUDify.configuration.crudify_visuals[model_name]&.to_h
             }
           end
-
+        
+          # Render the response as JSON
           render json: models_metadata, status: :ok
         end
 
