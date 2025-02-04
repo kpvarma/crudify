@@ -9,8 +9,7 @@ module CRUDify
       # Use the Configuration class to register models
       # after_initialize do
       #   # Skip if the model is in the excluded list or already registered
-      #   unless CRUDify.configuration.exclude_models.include?(model_name) ||
-      #           CRUDify.configuration.crudify_models.key?(model_name)
+      #   unless CRUDify.configuration.exclude_models.include?(model_name) || CRUDify.configuration.crudify_models.key?(model_name)
       #     CRUDify.configuration.register(model_name)
       #   end
       # end

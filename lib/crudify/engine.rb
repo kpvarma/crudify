@@ -38,26 +38,61 @@ module CRUDify
       CRUDify.configure do |config|
         # Optional: Set default configurations here
         config.default_api_end_points = [:index, :create, :read, :update, :delete]
-        config.admin_namespace = "crudify_admin"
         config.crudify_models = {} # Ensure the crudify_models hash is initialized
         config.crudify_visuals = {} # Ensure the crudify_models hash is initialized
         config.exclude_models = [] # Allow the host app to modify this
       end
     end
 
-    # initializer "crudify.auto_register_models" do
-    #   Rails.application.config.after_initialize do
-    #     ActiveRecord::Base.descendants.each do |model|
-    #       next if model.abstract_class? || CRUDify.configuration.exclude_models.include?(model.name)
-    #       unless CRUDify.configuration.crudify_models.key?(model.name)
-    #         Rails.logger.tagged("CRUDify") do
-    #           Rails.logger.info "Auto-registering model #{model.name}"
+    # initializer "crudify.register_models" do
+    #   ActiveSupport.on_load(:active_record) do
+    #     Rails.application.config.after_initialize do
+    #       Rails.application.eager_load!  # Ensure all models are loaded
+
+    #       ActiveRecord::Base.descendants.each do |model|
+    #         model_name = model.name
+          
+    #         if CRUDify.configuration.exclude_models.include?(model_name)
+    #           Rails.logger.info "[CRUDify] Skipping model: #{model_name} (excluded)"
+    #           next
     #         end
-    #         CRUDify.configuration.register(model.name)
+          
+    #         CRUDify.configuration.register(model_name)
+    #         Rails.logger.info "[CRUDify] Registered model: #{model_name}"
     #       end
     #     end
     #   end
     # end
+
+    initializer "crudify.auto_register_models" do
+      Rails.application.config.after_initialize do
+        # Force eager load before fetching model descendants
+        Rails.application.eager_load!
+
+        ActiveRecord::Base.descendants.each do |model|
+          
+          next if model.abstract_class?
+
+          # Check if the model has a corresponding database table
+          next unless model.table_exists?
+
+          if CRUDify.configuration.exclude_models.include?(model.name)
+            Rails.logger.tagged("CRUDify") do
+              Rails.logger.debug "Skipping Model #{model.name}"
+            end
+            next
+          end
+
+          unless CRUDify.configuration.crudify_models.key?(model.name)
+            Rails.logger.tagged("CRUDify") do
+              Rails.logger.debug "Auto-registering Model #{model.name}"
+            end
+            CRUDify.configuration.register(model.name)
+            CRUDify.configuration.visualise(model.name)
+          end
+        end
+      end
+    end
 
     # Ensure engine configuration is initialized
     initializer "crudify.load_model_configs" do |app|
@@ -66,19 +101,19 @@ module CRUDify
 
         if Dir.exist?(config_path)
           Rails.logger.tagged("CRUDify") do
-            Rails.logger.debug "Loading configurations from #{config_path}"
+            Rails.logger.info "Loading configurations from #{config_path}"
           end
           
           # Require each Ruby file in the directory
           Dir.glob(config_path.join("*.rb")).each do |file|
             Rails.logger.tagged("CRUDify") do
-              Rails.logger.debug "Loaded configuration from file #{file}"
+              Rails.logger.debug "Loaded CRUDify config from #{file}"
             end
             begin
               require_dependency file
             rescue StandardError => e
               Rails.logger.tagged("CRUDify") do
-                Rails.logger.error "Failed to load configuration file #{file}. Error: #{e.message}"
+                Rails.logger.error "Failed to load CRUDify config from #{file}. Error: #{e.message}"
                 Rails.logger.error "Backtrace:\n#{e.backtrace.join("\n")}"
               end
             end

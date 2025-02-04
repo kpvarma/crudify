@@ -11,11 +11,10 @@ require_relative "visualisation_config"
 module CRUDify
   module Configuration
     class Base
-      attr_accessor :crudify_models, :crudify_visuals, :default_api_end_points, :admin_namespace, :exclude_models
+      attr_accessor :crudify_models, :crudify_visuals, :default_api_end_points, :exclude_models
 
       def initialize
         @default_api_end_points = [:index, :create, :read, :update, :delete]
-        @admin_namespace = "crudify_admin"
         @crudify_models = {} # Initialize an empty dict for configurable models
         @crudify_visuals = {} # Initialize an empty dict for configurable models
         @exclude_models = [] # Models to exclude from auto-registration
@@ -28,6 +27,7 @@ module CRUDify
 
         # Skip registration if the model is excluded
         return if exclude_models.include?(model_class_name)
+        return if model_class_name == "CRUDify::ApiKey"
         
         # Initialize a new ModelConfig with the class name
         model_config = ModelConfig.new(model_class_name)

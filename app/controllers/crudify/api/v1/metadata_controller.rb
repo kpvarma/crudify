@@ -48,6 +48,7 @@ module CRUDify
 
           if model_config
             render json: {
+              
               model_name: model.name,
               title: model_config.get_title,
               description: model_config.get_description,
@@ -57,12 +58,13 @@ module CRUDify
               
               columns: model_config.get_list_columns,
               form_fields: model_config.get_form_fields,
+              per_page: model_config.get_records_per_page,
               scopes: format_scopes(model_config.get_record_scopes),
               filters: format_filters(model_config.get_record_filters),
-              per_page: model_config.get_records_per_page,
 
               api_end_points: model_config.get_api_end_points,
-              custom_api_end_points: model_config.get_custom_api_end_points,
+              custom_member_actions: model_config.get_custom_member_actions,
+              custom_collection_actions: model_config.get_custom_collection_actions,
             }, status: :ok
           else
             render json: { error: "Model #{model.name} not found" }, status: :not_found
