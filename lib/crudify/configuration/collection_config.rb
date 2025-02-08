@@ -7,7 +7,6 @@ module CRUDify
           @name = name
           @title = nil
           @caption = nil
-          @collection_type = options[:collection_type]
           @metrics = options[:metrics] || []
           @api_end_point = options[:api_end_point]
           @display = Hash.new()
@@ -30,12 +29,6 @@ module CRUDify
         def caption(value = nil)
           return @caption if value.nil?
           @caption = value
-        end
-
-        # Getter and setter for collection_type
-        def collection_type(value = nil)
-          return @collection_type if value.nil?
-          @collection_type = value
         end
 
         # Add a metric to the visualisation
@@ -87,7 +80,6 @@ module CRUDify
             name: name,
             title: title,
             caption: caption,
-            collection_type: collection_type,
             metrics: metrics,
             api_end_point: api_end_point,
             display: display

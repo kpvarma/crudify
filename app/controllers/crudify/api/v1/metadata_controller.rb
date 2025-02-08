@@ -75,7 +75,6 @@ module CRUDify
               display = cv.display[vis_type]
               next if display.nil?
               vis_data[cv.name] = {
-                "collection_type": cv.collection_type,
                 "title": cv.title,
                 "caption": cv.caption,
                 "api_end_point": cv.api_end_point,
@@ -118,10 +117,7 @@ module CRUDify
           
           if visual_config
             render json: {
-              
               model_name: @model.name,
-              title: visual_config.summary_title,
-              description: visual_config.summary_description,
               visualisations: visual_config.get_visualisations(:index),
             }, status: :ok
           else

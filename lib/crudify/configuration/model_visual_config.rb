@@ -28,8 +28,8 @@ module CRUDify
       def get_visualisations(vis_type)
         vis_data = {}
         collection_visualisations.each do |cv|
+          puts "#{cv.display}"
           vis_data[cv.name] = {
-            "collection_type": cv.collection_type,
             "api_end_point": cv.api_end_point,
             "display": cv.display[vis_type],
             "metrics": @metrics.select{|x| cv.metrics.include?(x.name) }.map(&:to_h)
