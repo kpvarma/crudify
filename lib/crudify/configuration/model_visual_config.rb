@@ -28,7 +28,7 @@ module CRUDify
       def get_visualisations(vis_type)
         vis_data = {}
         collection_visualisations.each do |cv|
-          puts "#{cv.display}"
+          # puts "#{cv.display}"
           vis_data[cv.name] = {
             "api_end_point": cv.api_end_point,
             "display": cv.display[vis_type],

@@ -62,7 +62,6 @@ module CRUDify
 
         # Renders all visualisations metadata for rendering dashboard
         def dashboard_visualisations
-          Dir[Rails.root.join("config/crudify/**/*.rb")].each { |file| load file }
           vis_type = :dashboard
           visual_config = CRUDify.configuration.crudify_visuals.select{|x, y| y.collection_visualisations unless y.collection_visualisations.empty? }
           visual_metadata = visual_config.map do |model_name, visual_config|
@@ -78,6 +77,7 @@ module CRUDify
                 "title": cv.title,
                 "caption": cv.caption,
                 "api_end_point": cv.api_end_point,
+                "hello": "world",
                 "display": display,
                 "metrics": metrics
               } if cv.display&.has_key?(vis_type)
@@ -100,7 +100,6 @@ module CRUDify
           
           if visual_config
             render json: {
-              
               model_name: @model.name,
               title: visual_config.summary_title,
               description: visual_config.summary_description,
@@ -113,11 +112,14 @@ module CRUDify
 
         # Renders all visualisations metadata for rendering index page of a particular model
         def index_visualisations
+          Dir[Rails.root.join("config/crudify/**/*.rb")].each { |file| load file }
           visual_config = CRUDify.configuration.crudify_visuals[@model.name]
           
           if visual_config
             render json: {
               model_name: @model.name,
+              title: visual_config.summary_title,
+              description: visual_config.summary_description,
               visualisations: visual_config.get_visualisations(:index),
             }, status: :ok
           else
