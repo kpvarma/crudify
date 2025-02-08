@@ -22,9 +22,20 @@ module CRUDify
           metrics: metrics.map(&:to_h),
           collection_visualisations: collection_visualisations.map(&:to_h),
           entity_visualisations: entity_visualisations.map(&:to_h),
-          # collection_end_points: collection_end_points.map { |ep| { name: ep[:name], method: ep[:method] } },
-          # entity_end_points: entity_end_points.map { |ep| { name: ep[:name], method: ep[:method] } }
         }
+      end
+
+      def get_visualisations(vis_type)
+        vis_data = {}
+        collection_visualisations.each do |cv|
+          vis_data[cv.name] = {
+            "collection_type": cv.collection_type,
+            "api_end_point": cv.api_end_point,
+            "display": cv.display[vis_type],
+            "metrics": @metrics.select{|x| cv.metrics.include?(x.name) }.map(&:to_h)
+          } if cv.display&.has_key?(vis_type)
+        end
+        return vis_data
       end
 
       # Set summary title
@@ -56,7 +67,7 @@ module CRUDify
       # @param [Hash] options - Configuration options for the visualisation
       # @param [Proc] block - Optional block to further configure the visualisation
       def add_collection_visualisation(name, options = {}, &block)
-        visualisation = VisualizationConfig.new(name, options)
+        visualisation = CollectionConfig.new(name, options)
         visualisation.instance_eval(&block) if block_given?
         @collection_visualisations << visualisation
       end
@@ -68,7 +79,7 @@ module CRUDify
       # @param [Hash] options - Configuration options for the visualisation
       # @param [Proc] block - Optional block to further configure the visualisation
       def add_entity_visualisation(name, options = {}, &block)
-        visualisation = VisualizationConfig.new(name, options)
+        visualisation = CollectionConfig.new(name, options)
         visualisation.instance_eval(&block) if block_given?
         @entity_visualisations << visualisation
       end

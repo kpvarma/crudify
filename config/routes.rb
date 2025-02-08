@@ -9,7 +9,13 @@ CRUDify::Engine.routes.draw do
       post '/validate_api_key', to: 'api_keys#validate'
 
       get "/metadata", to: "metadata#index"
+      get "/metadata/dashboard_visualisations", to: "metadata#dashboard_visualisations"
+
       get "/metadata/:model_name", to: "metadata#show"
+      get "/metadata/summary_visualisations/:model_name", to: "metadata#summary_visualisations"
+      get "/metadata/index_visualisations/:model_name", to: "metadata#index_visualisations"
+
+      get "/metadata/show_visualisations/:model_name/:id", to: "metadata#show_visualisations"
 
       # Dynamically generate CRUD routes under /dynamic_crud/:model_name
       scope '/dynamic_crud/:model_name' do

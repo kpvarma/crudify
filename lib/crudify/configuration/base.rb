@@ -5,8 +5,8 @@ require_relative "column_config"
 require_relative "form_config"
 
 require_relative "model_visual_config"
+require_relative "collection_config"
 require_relative "metric_config"
-require_relative "visualisation_config"
 
 module CRUDify
   module Configuration
@@ -46,6 +46,7 @@ module CRUDify
 
         # Skip registration if the model is excluded
         return if exclude_models.include?(model_class_name)
+        return if model_class_name == "CRUDify::ApiKey"
         
         # Initialize a new ModelVisualConfig with the class name
         model_visual_config = ModelVisualConfig.new(model_class_name)
