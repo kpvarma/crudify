@@ -9,7 +9,12 @@ module CRUDify
         
             # Define a column with name, options, and block
             def column(name, options = {}, &block)
-                @columns << { name: name, options: options, block: block }
+                @columns << { name: name.to_s, options: options, block: block }
+            end
+
+            # Remove a column
+            def remove_column(name)
+                @columns.reject! { |col| col[:name] == name } if name
             end
 
             # Retrieve columns with details for processing

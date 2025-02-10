@@ -1,4 +1,5 @@
 require 'pry'
+require_relative "./auto_register"
 
 module CRUDify
   class Engine < ::Rails::Engine
@@ -44,53 +45,13 @@ module CRUDify
       end
     end
 
-    # initializer "crudify.register_models" do
-    #   ActiveSupport.on_load(:active_record) do
-    #     Rails.application.config.after_initialize do
-    #       Rails.application.eager_load!  # Ensure all models are loaded
-
-    #       ActiveRecord::Base.descendants.each do |model|
-    #         model_name = model.name
-          
-    #         if CRUDify.configuration.exclude_models.include?(model_name)
-    #           Rails.logger.info "[CRUDify] Skipping model: #{model_name} (excluded)"
-    #           next
-    #         end
-          
-    #         CRUDify.configuration.register(model_name)
-    #         Rails.logger.info "[CRUDify] Registered model: #{model_name}"
-    #       end
-    #     end
-    #   end
-    # end
-
     initializer "crudify.auto_register_models" do
       Rails.application.config.after_initialize do
+
         # Force eager load before fetching model descendants
         Rails.application.eager_load!
 
-        ActiveRecord::Base.descendants.each do |model|
-          
-          next if model.abstract_class?
-
-          # Check if the model has a corresponding database table
-          next unless model.table_exists?
-
-          if CRUDify.configuration.exclude_models.include?(model.name)
-            Rails.logger.tagged("CRUDify") do
-              Rails.logger.debug "Skipping Model #{model.name}"
-            end
-            next
-          end
-
-          unless CRUDify.configuration.crudify_models.key?(model.name)
-            Rails.logger.tagged("CRUDify") do
-              Rails.logger.debug "Auto-registering Model #{model.name}"
-            end
-            CRUDify.configuration.register(model.name)
-            CRUDify.configuration.visualise(model.name)
-          end
-        end
+        CRUDify::AutoRegister.run
       end
     end
 

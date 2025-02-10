@@ -16,13 +16,28 @@ module CRUDify
           end
         
           # Generate the models metadata
-          models_metadata = CRUDify.configuration.crudify_models.map do |model_name, config|
+          models_metadata = CRUDify.configuration.crudify_models.map do |model_name, model_config|
+            @model = model_name.constantize
             {
               name: model_name,
-              menu: config.get_menu,
-              title: config.get_title,
-              description: config.get_description,
+              menu: model_config.menu,
+              title: model_config.title,
+              description: model_config.description,
               is_devise_model: devise_models.include?(model_name),
+              
+              attributes: @model.attributes_metadata,
+              associations: @model.associations_metadata,
+              
+              columns: model_config.get_list_columns,
+              form_fields: model_config.get_form_fields,
+              per_page: model_config.get_records_per_page,
+              scopes: format_scopes(model_config.get_record_scopes),
+              filters: format_filters(model_config.get_record_filters),
+
+              api_end_points: model_config.get_api_end_points,
+              custom_member_actions: model_config.get_custom_member_actions,
+              custom_collection_actions: model_config.get_custom_collection_actions,
+
               visual_config: CRUDify.configuration.crudify_visuals[model_name]&.to_h
             }
           end
@@ -39,9 +54,9 @@ module CRUDify
             render json: {
               
               model_name: @model.name,
-              title: model_config.get_title,
-              description: model_config.get_description,
-              menu: model_config.get_menu,
+              title: model_config.title,
+              description: model_config.description,
+              menu: model_config.menu,
               attributes: @model.attributes_metadata,
               associations: @model.associations_metadata,
               

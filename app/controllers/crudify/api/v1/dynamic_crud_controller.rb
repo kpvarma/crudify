@@ -18,7 +18,9 @@ module CRUDify
                     # Check if the record responds to the column name
                     if col[:block]
                       # Use block if provided
-                      obj[col[:name]] = col[:block].call(record)
+                      val = col[:block].call(record)
+                      obj[col[:name]] = val
+                      
                     elsif record.respond_to?(col[:name])
                       # Use public_send if the record responds to the field name
                       obj[col[:name]] = record.public_send(col[:name])
