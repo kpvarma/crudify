@@ -26,6 +26,17 @@ module CRUDify
           CRUDify.configuration.visualise(model.name)
         end
       end
+
+      # Auto Registering CRUDify::Home
+      Rails.logger.tagged("CRUDify") { Rails.logger.debug "Auto-registering Model CRUDify::Home" }
+      
+      # Register the model in CRUDify
+      CRUDify.configuration.register(CRUDify::Home) do
+        description "Listing all records"
+      end
+
+      # Register visualization for the model
+      CRUDify.configuration.visualise(CRUDify::Home)
     end
   end
 end

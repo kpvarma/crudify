@@ -5,23 +5,6 @@
 all widgets should have refresh button 
 refresh_interval is not used now. auto refresh should be implemented
 
-
-## Menu
-
-### Modified Menu
-
-1. Dashboard
-2. Students
-3. Teachers
-4. Courses
-5. Reports
-
-Tab based view 
-1. Summary
-2. Data
-3. Item Details
-4. New/Edit
-
 ## Dashboard Page
 
 Default Widgets for ActiveRecord::Base

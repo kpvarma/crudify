@@ -79,6 +79,8 @@ module CRUDify
       def set_default_columns
         @list_columns = ColumnConfig.new
 
+        return unless @model_class.respond_to?(:columns)
+
         # Adding the default id column
         # @list_columns.column :id, label: "ID", type: :id do |record|
         #   record.id
