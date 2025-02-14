@@ -1,7 +1,7 @@
 module CRUDify
     module Configuration
       class CollectionConfig
-        attr_reader :name, :display, :refresh_interval
+        attr_reader :name
   
         def initialize(name, options = {})
           @name = name
@@ -9,8 +9,6 @@ module CRUDify
           @caption = nil
           @metrics = options[:metrics] || []
           @api_end_point = options[:api_end_point]
-          @display = Hash.new()
-          @refresh_interval = 0
         end
 
         # Getter and setter for name
@@ -43,37 +41,6 @@ module CRUDify
           @api_end_point = value
         end
         
-        # Getter and setter for refresh_interval
-        def refresh_interval(value = nil)
-          return @refresh_interval if value.nil?
-          @refresh_interval = value
-        end
-       
-        # Getter and setter for display
-        def display_on_dashboard(x: 0, y: 0, w: 12, h: 2)
-          value = { x: x, y: y, w: w, h: h }
-          valid_display_structure?(value)
-          @display[:dashboard] = value
-        end
-
-        def display_on_summary(x: 0, y: 0, w: 12, h: 2)
-          value = { x: x, y: y, w: w, h: h }
-          valid_display_structure?(value)  
-          @display[:summary] = value  
-        end
-
-        def display_on_index(x: 0, y: 0, w: 12, h: 2)
-          value = { x: x, y: y, w: w, h: h }
-          valid_display_structure?(value)
-          @display[:index] = value
-        end
-
-        def display_on_show(x: 0, y: 0, w: 12, h: 2)
-          value = { x: x, y: y, w: w, h: h }  
-          valid_display_structure?(value)
-          @display[:show] = value
-        end
-        
         # Serialize visualization to hash
         def to_h
           {
@@ -81,18 +48,12 @@ module CRUDify
             title: title,
             caption: caption,
             metrics: metrics,
-            api_end_point: api_end_point,
-            display: display
+            api_end_point: api_end_point
           }
         end
 
         private
         
-        def valid_display_structure?(value)
-          unless (value.is_a?(Hash) && value.keys.sort == [:h, :w, :x, :y] && value.values.all? { |v| v.is_a?(Integer) && v >= 0 })
-            raise ArgumentError, "Invalid display format. Must be a hash with valid keys and {x, y, w, h} values."
-          end  
-        end
       end
     end
   end

@@ -9,6 +9,7 @@ CRUDify::Engine.routes.draw do
       post '/validate_api_key', to: 'api_keys#validate'
 
       get "/metadata", to: "metadata#index"
+      get "/metadata/old", to: "metadata#index_old"
       get "/metadata/dashboard_visualisations", to: "metadata#dashboard_visualisations"
 
       get "/metadata/:model_name", to: "metadata#show"

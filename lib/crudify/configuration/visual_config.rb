@@ -1,6 +1,6 @@
 module CRUDify
   module Configuration
-    class ModelVisualConfig
+    class VisualConfig
       attr_reader :summary_title, :summary_description, :metrics, 
                   :collection_visualisations, :entity_visualisations,
                   :collection_end_points, :entity_end_points

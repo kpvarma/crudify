@@ -2,7 +2,7 @@ module CRUDify
   module Configuration
     class ModelConfig
       attr_accessor :name, :menu, :title, :description, :api_end_points, :custom_member_actions, :custom_collection_actions,
-                    :list_columns, :form_fields, :records_per_page, :record_scopes, :record_filters
+                    :list_columns, :form_fields, :records_per_page, :record_scopes, :record_filters, :summary_page
       
       RESTRICTED_COLUMN_NAMES = [
         # Security & Authentication
@@ -50,6 +50,7 @@ module CRUDify
         @columns_to_exclude = []
         # @list_columns = ColumnConfig.new
         @form_fields = FieldConfig.new
+        @summary_page = nil
 
         # Initialize with default config values
         set_default_config
@@ -176,6 +177,12 @@ module CRUDify
       def description(value = nil)
         return @description if value.nil?
         @description = value
+      end
+      
+      # Getter and setter for summary_page
+      def summary_page(value = nil)
+        return @summary_page if value.nil?
+        @summary_page = value
       end
     
       def api_end_points(*args)
