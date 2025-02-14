@@ -62,10 +62,10 @@ module CRUDify
             }
           end
 
-          visuals_metadata = {}
-          CRUDify.configuration.crudify_visuals.map do |model_name, visual_config|
-            visuals_metadata[model_name] = visual_config.to_h
-          end
+          # visuals_metadata = {}
+          # CRUDify.configuration.crudify_visuals.map do |model_name, visual_config|
+          #   visuals_metadata[model_name] = visual_config.to_h
+          # end
           
           metadata ={
             nav_menu: nav_menu_metadata,
@@ -74,7 +74,7 @@ module CRUDify
             index_pages: index_page_metadata,
             reports: report_metadata,
             models: models_metadata,
-            visuals: visuals_metadata,
+            # visuals: visuals_metadata,
           } 
           
           # Render the response as JSON
